@@ -1,35 +1,44 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Github } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Projects() {
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce platform with product catalog, shopping cart, and payment integration.",
+      title: "MambaETL",
+      description:
+        "An open source emr system reporting ETL tooling and reports design on openmrs platform",
       image: "/placeholder.svg?height=300&width=500",
-      tags: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
+      tags: ["Mysql", "Java", "Python", "Shell", "Apache Superset"],
       githubUrl: "https://github.com/samuelabebayehu",
       liveUrl: "https://github.com/samuelabebayehu",
     },
     {
-      title: "Task Management App",
+      title: "ERP Platform",
       description:
-        "A collaborative task management application with real-time updates and team collaboration features.",
+        "A project focused on enabling digital HR management, Biometric timesheet/attendance deployment and automated integration",
       image: "/placeholder.svg?height=300&width=500",
-      tags: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
+      tags: ["Python", "Postgres", "Cloud", "Ubuntu"],
       githubUrl: "https://github.com/samuelabebayehu",
       liveUrl: "https://github.com/samuelabebayehu",
     },
     {
       title: "Weather Dashboard",
-      description: "A weather dashboard that displays current and forecasted weather data for multiple locations.",
+      description:
+        "A weather dashboard that displays current and forecasted weather data for multiple locations.",
       image: "/placeholder.svg?height=300&width=500",
       tags: ["React", "OpenWeather API", "Chart.js", "CSS"],
       githubUrl: "https://github.com/samuelabebayehu",
@@ -37,13 +46,14 @@ export default function Projects() {
     },
     {
       title: "Portfolio Website",
-      description: "A personal portfolio website showcasing projects and skills (this website).",
+      description:
+        "A personal portfolio website showcasing projects and skills (this website).",
       image: "/placeholder.svg?height=300&width=500",
       tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
       githubUrl: "https://github.com/samuelabebayehu",
       liveUrl: "https://github.com/samuelabebayehu",
     },
-  ]
+  ];
 
   return (
     <section id="projects" className="bg-muted/30">
@@ -90,12 +100,20 @@ export default function Projects() {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <Button asChild variant="outline" size="sm">
-                    <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Github className="mr-2 h-4 w-4" /> Code
                     </Link>
                   </Button>
                   <Button asChild size="sm">
-                    <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
                     </Link>
                   </Button>
@@ -106,5 +124,5 @@ export default function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }
