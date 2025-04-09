@@ -18,18 +18,19 @@ import Image from "next/image";
 export default function Projects() {
   const projects = [
     {
-      title: "MambaETL",
+      title: "MambaETL: OpenMRS Reporting Solution",
       description:
-        "An open source emr system reporting ETL tooling and reports design on openmrs platform",
+        "ETL (Extract, Transform, Load) tooling and designed reports for OpenMRS, an open-source Electronic Medical Record (EMR) system. This project facilitated data-driven insights within the healthcare domain.",
       image: "/placeholder.svg?height=300&width=500",
       tags: ["Mysql", "Java", "Python", "Shell", "Apache Superset"],
       githubUrl: "https://github.com/samuelabebayehu",
       liveUrl: "https://github.com/samuelabebayehu",
     },
     {
-      title: "ERP Platform",
+      title:
+        "Modernizing HR Management with Biometric Data and Automated Workflows",
       description:
-        "A project focused on enabling digital HR management, Biometric timesheet/attendance deployment and automated integration",
+        "A digital HR management system incorporating biometric timesheet and attendance tracking. The project emphasized automated integration to facilitate data-driven insights and improve HR operational efficiency.",
       image: "/placeholder.svg?height=300&width=500",
       tags: ["Python", "Postgres", "Cloud", "Ubuntu"],
       githubUrl: "https://github.com/samuelabebayehu",
