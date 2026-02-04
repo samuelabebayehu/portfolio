@@ -60,8 +60,10 @@ export default function About() {
               collaborating with other developers to create innovative solutions.
             </p>
             <div className="pt-4">
-              <Button>
-                <Download className="mr-2 h-4 w-4" /> Download Resume
+              <Button asChild>
+                <a href="/cv.pdf" download="Samuel_Abebayehu_CV.pdf">
+                  <Download className="mr-2 h-4 w-4" /> Download Resume
+                </a>
               </Button>
             </div>
           </motion.div>

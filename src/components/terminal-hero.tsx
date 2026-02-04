@@ -35,10 +35,10 @@ export default function TerminalHero() {
 
     switch (trimmedCmd) {
       case 'help':
-        newOutput.push({ type: 'response', content: 'Available commands:\n  ls       - List directory contents\n  cd [dir] - Change directory (navigate)\n  cat [file] - Display file content\n  clear    - Clear terminal\n  contact  - Get contact info' });
+        newOutput.push({ type: 'response', content: 'Available commands:\n  ls       - List directory contents\n  cd [dir] - Change directory (navigate)\n  cat [file] - Display file content\n  wget cv.pdf - Download CV\n  clear    - Clear terminal\n  contact  - Get contact info' });
         break;
       case 'ls':
-        newOutput.push({ type: 'response', content: 'about.txt  projects/  skills/  contact.sh' });
+        newOutput.push({ type: 'response', content: 'about.txt  projects/  skills/  contact.sh  cv.pdf' });
         break;
       case 'clear':
         setOutput([]);
@@ -59,6 +59,14 @@ export default function TerminalHero() {
       case './contact.sh':
         newOutput.push({ type: 'response', content: 'Opening communication channels...' });
         scrollToSection('contact');
+        break;
+      case 'wget cv.pdf':
+      case 'curl -O cv.pdf':
+        newOutput.push({ type: 'response', content: 'Downloading Samuel_Abebayehu_CV.pdf... [100%]' });
+        const link = document.createElement('a');
+        link.href = '/cv.pdf';
+        link.download = 'Samuel_Abebayehu_CV.pdf';
+        link.click();
         break;
       default:
         if (trimmedCmd.startsWith('cd ')) {
