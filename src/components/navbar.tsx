@@ -54,11 +54,11 @@ export default function Navbar() {
   }
 
   const navLinks = [
-    { name: "Home", href: "home" },
-    { name: "About", href: "about" },
-    { name: "Skills", href: "skills" },
-    { name: "Projects", href: "projects" },
-    { name: "Contact", href: "contact" },
+    { name: "/root", href: "home" },
+    { name: "/usr/bin/whoami", href: "about" },
+    { name: "/etc/profile", href: "skills" },
+    { name: "/var/www/html", href: "projects" },
+    { name: "/dev/tcp/connect", href: "contact" },
   ]
 
   return (
@@ -74,8 +74,7 @@ export default function Navbar() {
             className="flex items-center space-x-2 group text-primary font-bold text-xl tracking-tighter"
             aria-label="Go to home"
           >
-            <span className="mr-2">$</span>
-            <span className="group-hover:underline decoration-2 underline-offset-4">~/portfolio</span>
+            <span className="mr-2 text-2xl">/</span>
             <span className="w-2.5 h-5 bg-primary animate-pulse ml-1 inline-block" />
           </button>
 

@@ -1,9 +1,9 @@
 import Navbar from "@/components/navbar"
 import { ThemeProvider } from "@/theme-provider"
-import Hero from "@/components/hero"
+import TerminalHero from "@/components/terminal-hero"
 import About from "@/components/about"
 import Skills from "@/components/skills"
-import Projects from "@/components/projects"
+import ProjectDashboard from "@/components/project-dashboard"
 import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 import ScrollToTop from "@/components/scroll-to-top"
@@ -14,10 +14,10 @@ function App() {
       <div className="relative min-h-screen">
           <Navbar />
           <main>
-            <Hero />
+            <TerminalHero />
             <About />
             <Skills />
-            <Projects />
+            <ProjectDashboard />
             <Contact />
           </main>
           <Footer />
