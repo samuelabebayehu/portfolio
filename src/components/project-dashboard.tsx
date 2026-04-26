@@ -34,7 +34,7 @@ const projects: Project[] = [
     id: "mamba-etl",
     number: "02",
     title: "Healthcare Data Pipeline",
-    name: "MaMBA ETL Service",
+    name: "MaMBA ETL Pipeline",
     description:
       "An automated ETL pipeline for OpenMRS healthcare data, powering reporting and analytics for medical facilities across East Africa. Processes thousands of patient records daily into a data warehouse for Apache Superset dashboards.",
     tags: ["Java", "Python", "MySQL", "Shell", "Apache Superset"],
@@ -45,7 +45,7 @@ const projects: Project[] = [
     id: "hr-system",
     number: "03",
     title: "HR Management System",
-    name: "Digital HR & Biometrics",
+    name: "Digital Biometrics enabled HR",
     description:
       "A digital HR platform with biometric attendance integration, leave management, and payroll processing. Deployed on Ubuntu cloud infrastructure with automated backups and role-based access control.",
     tags: ["Python", "PostgreSQL", "Cloud", "Ubuntu"],
