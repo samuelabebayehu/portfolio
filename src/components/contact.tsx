@@ -75,7 +75,11 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          <p className="text-primary font-medium mb-2 text-sm tracking-wider uppercase">Contact</p>
           <h2 className="section-title">Get In Touch</h2>
+          <p className="text-muted-foreground max-w-2xl">
+            Have a project in mind or want to work together? I'd love to hear from you.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
