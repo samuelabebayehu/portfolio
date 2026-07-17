@@ -1,149 +1,150 @@
-import { motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github } from "lucide-react";
+const FEATURED = [
+  {
+    number: "01",
+    title: "Yesera — multi-service marketplace",
+    status: "● LIVE",
+    description:
+      "Cooperating services behind Keycloak SSO: talent discovery and job matching, asset rental with live GPS tracking, and a Telegram commerce bot for order flows.",
+    stack: "Next.js · Spring Boot · Keycloak · PostgreSQL · Docker",
+    link: { label: "yesera.samuel.et →", href: "https://yesera.samuel.et" },
+  },
+  {
+    number: "02",
+    title: "Lane — ride-sharing platform",
+    status: "● BACKEND LIVE",
+    description:
+      "Self-hosted OSRM routing over PostGIS, WebSocket live tracking, chat and price negotiation, Telebirr payments, Fayda national-ID verification.",
+    stack: "Flutter · FastAPI · PostGIS · WebSockets · Redis · OSRM",
+    link: null,
+  },
+]
+
+const OTHER_PROJECTS = [
+  {
+    number: "03",
+    title: "MambaETL reporting pipeline",
+    description:
+      "ETL + warehousing for OpenMRS → PEPFAR reporting, deployed at facility level across Ethiopia, feeding Superset dashboards.",
+    stack: "Java · Python · SQL · Superset",
+    tag: { label: "open source →", href: "https://github.com/samuelabebayehu/openmrs-module-mamba-core", color: "var(--green)" },
+  },
+  {
+    number: "04",
+    title: "Airline CRM integration",
+    description:
+      "Streaming data integration into Oracle CRM for Ethiopian Airlines — one platform out of siloed sales, service and marketing.",
+    stack: "Oracle CX · Java · Python",
+    tag: { label: "enterprise", href: null, color: "var(--faint)" },
+  },
+  {
+    number: "05",
+    title: "Sabre / Amadeus loyalty bridge",
+    description:
+      "Rules analyzer triggering SOAP calls to sync mileage purchases across two vendor reservation systems — no vendor enhancement needed.",
+    stack: "Java · NiFi · SOAP",
+    tag: { label: "enterprise", href: null, color: "var(--faint)" },
+  },
+  {
+    number: "06",
+    title: "Biometrics-enabled HR platform",
+    description:
+      "Biometric attendance, leave management and payroll on Ubuntu cloud infrastructure with automated backups and RBAC.",
+    stack: "Python · PostgreSQL · Cloud",
+    tag: { label: "private", href: null, color: "var(--faint)" },
+  },
+]
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "Yesera - Ethiopian Talent Marketplace",
-      description: "A comprehensive platform connecting Ethiopian talent with global opportunities. Features include talent profiles, job listings, and real-time messaging.",
-      image: "/yesera.png", 
-      tags: ["Next.js", "Spring Boot", "Keycloak", "Docker", "PostgreSQL"],
-      githubUrl: "https://github.com/samuelabebayehu",
-      liveUrl: "https://yesera.samuel.et",
-    },
-    {
-      title: "MambaETL: OpenMRS Reporting Solution",
-      description:
-        "ETL (Extract, Transform, Load) tooling and designed reports for OpenMRS, an open-source Electronic Medical Record (EMR) system. This project facilitated data-driven insights within the healthcare domain.",
-      image: "/Chart.jpg?height=300&width=500",
-      tags: ["Mysql", "Java", "Python", "Shell", "Apache Superset"],
-      githubUrl: "https://github.com/samuelabebayehu",
-      liveUrl: "https://github.com/samuelabebayehu",
-    },
-    {
-      title: "Modernizing HR Management",
-      description:
-        "A digital HR management system incorporating biometric timesheet and attendance tracking. The project emphasized automated integration to facilitate data-driven insights and improve HR operational efficiency.",
-      image: "/People.jpg?height=300&width=500",
-      tags: ["Python", "Postgres", "Cloud", "Ubuntu"],
-      githubUrl: "https://github.com/samuelabebayehu",
-      liveUrl: "https://github.com/samuelabebayehu",
-    },
-    {
-      title: "Weather Dashboard",
-      description:
-        "A weather dashboard that displays current and forecasted weather data for multiple locations.",
-      image: "/placeholder.svg?height=300&width=500",
-      tags: ["React", "OpenWeather API", "Chart.js", "CSS"],
-      githubUrl: "https://github.com/samuelabebayehu",
-      liveUrl: "https://github.com/samuelabebayehu",
-    },
-    {
-      title: "Portfolio Website",
-      description:
-        "A personal portfolio website showcasing projects and skills (this website).",
-      image: "/placeholder.svg?height=300&width=500",
-      tags: ["Vite", "React", "Tailwind CSS", "Framer Motion"],
-      githubUrl: "https://github.com/samuelabebayehu",
-      liveUrl: "https://github.com/samuelabebayehu",
-    },
-  ];
-
   return (
-    <section id="projects" className="bg-muted/30 py-20">
-      <div className="section-container relative">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-primary/20" />
-        <div className="absolute bottom-0 right-0 w-full h-[1px] bg-primary/20" />
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-block border-2 border-primary px-4 py-1 mb-6">
-            <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest text-primary">=== Projects ===</h2>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="h-full flex flex-col group hover:border-primary transition-colors duration-300">
-                <CardHeader className="border-b border-primary/20 bg-muted/50 py-3 relative">
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-lg font-mono truncate mr-2">{project.title}</CardTitle>
-                    <div className="flex space-x-1">
-                      <div className="w-3 h-3 border border-primary/50" />
-                      <div className="w-3 h-3 border border-primary/50" />
-                      <div className="w-3 h-3 bg-primary" />
-                    </div>
-                  </div>
-                </CardHeader>
-                
-                <div className="relative h-48 w-full overflow-hidden border-b border-primary/20 grayscale group-hover:grayscale-0 transition-all duration-500">
-                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent z-10 transition-colors" />
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-                
-                <CardContent className="flex-grow pt-6">
-                  <CardDescription className="mb-4 font-mono text-xs md:text-sm">
-                    {project.description}
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-between border-t border-primary/20 pt-4 bg-muted/20">
-                  <Button asChild variant="ghost" size="sm" className="hover:bg-primary hover:text-primary-foreground">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="mr-2 h-4 w-4" /> [ SRC ]
-                    </a>
-                  </Button>
-                  <Button asChild size="sm" variant="outline" className="hover:bg-primary hover:text-primary-foreground">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" /> [ DOM ]
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+    <div id="projects" className="section-container scroll-mt-[70px] py-16 md:py-[72px]">
+      <div className="mb-1.5 font-mono text-[10px] tracking-[0.2em]" style={{ color: "var(--faint)" }}>
+        DEPLOYMENTS
       </div>
-    </section>
-  );
+      <div className="mb-8 text-[26px] font-semibold tracking-[-0.02em] sm:text-[30px]">Featured projects</div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {FEATURED.map((project) => (
+          <div
+            key={project.number}
+            className="grid grid-cols-1 gap-6 rounded-lg border p-7 transition-colors hover:border-[var(--blue)] md:col-span-2 md:grid-cols-[1fr_auto]"
+            style={{ borderColor: "var(--blue-line)", background: "var(--blue-bg)" }}
+          >
+            <div>
+              <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
+                <span className="font-mono text-[11px]" style={{ color: "var(--faint)" }}>
+                  {project.number}
+                </span>
+                <span className="text-[19px] font-semibold">{project.title}</span>
+                <span
+                  className="rounded border px-[7px] py-0.5 font-mono text-[10px] font-medium"
+                  style={{ color: "var(--green)", borderColor: "var(--green-line)" }}
+                >
+                  {project.status}
+                </span>
+              </div>
+              <div className="max-w-[640px] font-sans text-[13.5px] leading-[1.65]" style={{ color: "var(--muted-txt)" }}>
+                {project.description}
+              </div>
+              <div className="mt-3.5 font-mono text-[11px]" style={{ color: "var(--blue)" }}>
+                {project.stack}
+              </div>
+            </div>
+            {project.link ? (
+              <a
+                href={project.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-center font-mono text-xs"
+                style={{ color: "var(--blue)" }}
+              >
+                {project.link.label}
+              </a>
+            ) : (
+              <span className="self-center font-mono text-xs" style={{ color: "var(--faint)" }}>
+                private repo
+              </span>
+            )}
+          </div>
+        ))}
+
+        {OTHER_PROJECTS.map((project) => (
+          <div
+            key={project.number}
+            className="rounded-lg border p-6 transition-colors hover:border-[var(--blue-line)]"
+            style={{ borderColor: "var(--line)", background: "var(--site-card)", boxShadow: "var(--site-shadow)" }}
+          >
+            <div className="mb-2.5 flex items-center gap-2.5">
+              <span className="font-mono text-[11px]" style={{ color: "var(--faint)" }}>
+                {project.number}
+              </span>
+              <span className="text-base font-semibold">{project.title}</span>
+            </div>
+            <div className="font-sans text-[13px] leading-[1.6]" style={{ color: "var(--muted-txt)" }}>
+              {project.description}
+            </div>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+              <span className="font-mono text-[11px]" style={{ color: "var(--blue)" }}>
+                {project.stack}
+              </span>
+              {project.tag.href ? (
+                <a
+                  href={project.tag.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[11px]"
+                  style={{ color: project.tag.color }}
+                >
+                  {project.tag.label}
+                </a>
+              ) : (
+                <span className="font-mono text-[11px]" style={{ color: project.tag.color }}>
+                  {project.tag.label}
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }

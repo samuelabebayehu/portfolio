@@ -1,125 +1,46 @@
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "./mode-toggle"
-import { Menu, X } from "lucide-react"
+import { useTheme } from "@/theme-provider"
+
+const LINKS = [
+  { href: "#work", label: "/work" },
+  { href: "#projects", label: "/projects" },
+  { href: "#skills", label: "/skills" },
+  { href: "#contact", label: "/contact" },
+]
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState("home")
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-      const sections = ["home", "about", "experience", "skills", "projects", "contact"]
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    setIsOpen(false)
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset
-      window.scrollTo({ top: offsetTop, behavior: "smooth" })
-    }
-  }
-
-  const navLinks = [
-    { name: "Home", href: "home" },
-    { name: "About", href: "about" },
-    { name: "Experience", href: "experience" },
-    { name: "Skills", href: "skills" },
-    { name: "Projects", href: "projects" },
-    { name: "Contact", href: "contact" },
-  ]
+  const { theme, setTheme } = useTheme()
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
-      }`}
+    <div
+      className="sticky top-0 z-50 border-b backdrop-blur-md"
+      style={{ background: "var(--nav-bg)", borderColor: "var(--line)" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <button
-            onClick={() => scrollToSection("home")}
-            className="font-bold text-lg tracking-tight text-foreground hover:text-primary transition-colors"
-            aria-label="Go to home"
-          >
-            Samuel<span className="text-primary">.</span>
-          </button>
-
-          {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-2">
-            <div className="flex space-x-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                    activeSection === link.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                  }`}
-                >
-                  {link.name}
-                </button>
-              ))}
-            </div>
-            <div className="ml-4">
-              <ModeToggle />
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="flex md:hidden items-center space-x-3">
-            <ModeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
-          <div className="px-4 pt-2 pb-4 space-y-1">
-            {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => scrollToSection(link.href)}
-                className={`block w-full text-left px-4 py-2.5 text-sm font-medium rounded-md transition-colors ${
-                  activeSection === link.href
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                }`}
-              >
-                {link.name}
-              </button>
+      <div className="section-container flex items-center justify-between py-4 font-mono text-xs">
+        <a href="#top" style={{ color: "var(--blue)" }}>
+          samuel.et<span style={{ color: "var(--faint)" }}> ~ v2.0</span>
+        </a>
+        <div className="flex items-center gap-4 sm:gap-6" style={{ color: "var(--dim)" }}>
+          <div className="hidden items-center gap-6 sm:flex">
+            {LINKS.map((link) => (
+              <a key={link.href} href={link.href} style={{ color: "var(--dim)" }}>
+                {link.label}
+              </a>
             ))}
           </div>
+          <span className="hidden sm:inline" style={{ color: "var(--green)" }}>
+            ● online
+          </span>
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            title="Toggle theme"
+            className="flex h-5 w-[34px] select-none items-center justify-center rounded-full border text-xs transition-colors"
+            style={{ borderColor: "var(--line2)", color: "var(--text)" }}
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? "☀" : "☾"}
+          </button>
         </div>
-      )}
-    </nav>
+      </div>
+    </div>
   )
 }

@@ -1,322 +1,191 @@
-"use client"
+import { useState } from "react"
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Download, ArrowRight, Github, Linkedin, Mail } from "lucide-react"
+const RELATIONS: Record<string, number[]> = {
+  s1: [1],
+  s2: [2],
+  s3: [3],
+  s4: [4],
+  o1: [5],
+  o2: [6],
+  o3: [7],
+  t: [1, 2, 3, 4, 5, 6, 7],
+}
 
-// Syntax-highlighted code card — always dark regardless of site theme
-function CodeCard() {
-  const k = "#bb9af7"   // keyword   (purple)
-  const s = "#9ece6a"   // string    (green)
-  const p = "#7dcfff"   // property  (blue)
-  const op = "#89ddff"  // operator  (cyan)
-  const num = "#ff9e64" // number/bool (orange)
-  const dim = "#565f89" // comment / dim
-  const base = "#c0caf5" // base text
+const CAPTIONS: Record<string, string> = {
+  s1: "Sabre & Amadeus — the loyalty ↔ reservation bridge at Ethiopian Airlines",
+  s2: "OpenMRS EMRs — national health records feeding MambaETL warehousing",
+  s3: "Oracle CRM — streaming integration unifying sales, service & marketing",
+  s4: "Telecom systems — Splunk / ELK / Grafana observability at Safaricom Ethiopia",
+  t: "the middle layer — NiFi flows, Java services, SQL ETL, Zookeeper-managed deploys",
+  o1: "PEPFAR reports — compliance reporting for 100s of Ethiopian health facilities",
+  o2: "BI dashboards — Superset, Power BI & SAP BI for operations and revenue",
+  o3: "real-time APIs — departure/arrival notifications and event-driven services",
+}
+
+const SOURCE_NODES = [
+  { id: "s1", y: 16, label: "Sabre / Amadeus" },
+  { id: "s2", y: 89, label: "OpenMRS EMRs" },
+  { id: "s3", y: 162, label: "Oracle CRM" },
+  { id: "s4", y: 235, label: "Telecom systems" },
+]
+
+const OUTPUT_NODES = [
+  { id: "o1", y: 41, label: "PEPFAR reports" },
+  { id: "o2", y: 126, label: "BI dashboards" },
+  { id: "o3", y: 211, label: "Real-time APIs" },
+]
+
+const SOURCE_PATHS = [
+  { id: 1, d: "M 196 40 C 300 40 300 150 384 150", dur: "2.6s", begin: "0s" },
+  { id: 2, d: "M 196 113 C 300 113 300 150 384 150", dur: "3.1s", begin: "0.6s" },
+  { id: 3, d: "M 196 186 C 300 186 300 150 384 150", dur: "2.8s", begin: "1.2s" },
+  { id: 4, d: "M 196 259 C 300 259 300 150 384 150", dur: "3.4s", begin: "1.8s" },
+]
+
+const OUTPUT_PATHS = [
+  { id: 5, d: "M 600 150 C 690 150 690 65 788 65", dur: "2.4s", begin: "0.4s" },
+  { id: 6, d: "M 600 150 C 690 150 690 150 788 150", dur: "2.9s", begin: "1s" },
+  { id: 7, d: "M 600 150 C 690 150 690 235 788 235", dur: "2.6s", begin: "1.6s" },
+]
+
+function DataFlowDiagram() {
+  const [hover, setHover] = useState<string | null>(null)
+
+  const pathOpacity = (id: number) => (!hover || RELATIONS[hover].includes(id) ? 1 : 0.12)
+  const nodeOpacity = (id: string) => (!hover || hover === id || id === "t" ? 1 : 0.3)
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 30, y: 10 }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
-      className="w-full max-w-[420px] select-none"
-    >
-      <div
-        className="rounded-xl overflow-hidden shadow-2xl"
-        style={{ background: "#11131d", border: "1px solid rgba(255,255,255,0.07)" }}
-      >
-        {/* Window bar */}
-        <div
-          className="flex items-center gap-3 px-4 py-3 border-b"
-          style={{ background: "#0d0f19", borderColor: "rgba(255,255,255,0.06)" }}
-        >
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
-            <div className="w-3 h-3 rounded-full" style={{ background: "#febc2e" }} />
-            <div className="w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
-          </div>
-          <span className="font-mono text-xs ml-1" style={{ color: dim }}>profile.ts</span>
-        </div>
+    <div>
+      <div className="overflow-x-auto">
+        <svg viewBox="0 0 984 300" className="block w-full min-w-[760px]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+          <g>
+            {[...SOURCE_PATHS, ...OUTPUT_PATHS].map((p) => (
+              <g key={p.id} style={{ opacity: pathOpacity(p.id), transition: "opacity .25s" }}>
+                <path
+                  id={`pl${p.id}`}
+                  d={p.d}
+                  fill="none"
+                  stroke={p.id <= 4 ? "var(--green-line)" : "var(--amber-line)"}
+                  strokeWidth={1.2}
+                />
+                <circle r={3.2} fill={p.id <= 4 ? "var(--green)" : "var(--amber)"}>
+                  <animateMotion dur={p.dur} begin={p.begin} repeatCount="indefinite">
+                    <mpath href={`#pl${p.id}`} />
+                  </animateMotion>
+                </circle>
+              </g>
+            ))}
 
-        {/* Code */}
-        <div className="px-5 py-5 font-mono text-[0.82rem] leading-[1.85] overflow-x-auto">
-          <div>
-            <span style={{ color: k }}>const </span>
-            <span style={{ color: base }}>samuel </span>
-            <span style={{ color: op }}>= </span>
-            <span style={{ color: base }}>{"{"}</span>
-          </div>
+            {SOURCE_NODES.map((n) => (
+              <g
+                key={n.id}
+                onMouseEnter={() => setHover(n.id)}
+                onMouseLeave={() => setHover(null)}
+                className="cursor-pointer"
+                style={{ opacity: nodeOpacity(n.id), transition: "opacity .25s" }}
+              >
+                <rect x={0} y={n.y} width={196} height={48} rx={6} fill="var(--green-bg)" stroke="var(--green-line)" />
+                <text x={16} y={n.y + 20} fontSize={11} fill="var(--faint)">
+                  source
+                </text>
+                <text x={16} y={n.y + 36} fontSize={12.5} fill="var(--text)" fontWeight={600}>
+                  {n.label}
+                </text>
+              </g>
+            ))}
 
-          <div className="pl-5">
-            <span style={{ color: p }}>role</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: s }}>"Backend & Data Engineer"</span>
-            <span style={{ color: base }}>,</span>
-          </div>
-
-          <div className="pl-5">
-            <span style={{ color: p }}>location</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: s }}>"Addis Ababa, Ethiopia 🇪🇹"</span>
-            <span style={{ color: base }}>,</span>
-          </div>
-
-          <div className="pl-5">
-            <span style={{ color: p }}>experience</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: s }}>"10+ years"</span>
-            <span style={{ color: base }}>,</span>
-          </div>
-
-          <div className="pl-5">
-            <span style={{ color: p }}>domains</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>Aviation</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Telecom</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Healthcare</span>
-            <span style={{ color: base }}>"],</span>
-          </div>
-
-          <div className="pl-5">
-            <span style={{ color: p }}>stack</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: base }}>{"{"}</span>
-          </div>
-
-          <div className="pl-10">
-            <span style={{ color: p }}>backend</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>Java</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Spring Boot</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Python</span>
-            <span style={{ color: base }}>"],</span>
-          </div>
-
-          <div className="pl-10">
-            <span style={{ color: p }}>frontend</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>React</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Next.js</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>TypeScript</span>
-            <span style={{ color: base }}>"],</span>
-          </div>
-
-          <div className="pl-10">
-            <span style={{ color: p }}>data</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>PostgreSQL</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>ETL</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Apache Superset</span>
-            <span style={{ color: base }}>"],</span>
-          </div>
-
-          <div className="pl-10">
-            <span style={{ color: p }}>observability</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>Splunk</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>ELK</span>
-            <span style={{ color: base }}>"</span>
-            <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Grafana</span>
-            <span style={{ color: base }}>"],</span>
-          </div>
-
-          <div className="pl-5">
-            <span style={{ color: base }}>{"  },"}</span>
-          </div>
-
-          <div className="pl-5">
-            <span style={{ color: p }}>openToWork</span>
-            <span style={{ color: op }}>: </span>
-            <span style={{ color: num }}>true</span>
-            <span style={{ color: base }}>,</span>
-          </div>
-
-          <div>
-            <span style={{ color: base }}>{"}"}</span>
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ repeat: Infinity, duration: 1.1, ease: "steps(1)" }}
-              style={{ color: p }}
-              className="ml-0.5"
+            <g
+              onMouseEnter={() => setHover("t")}
+              onMouseLeave={() => setHover(null)}
+              className="cursor-pointer"
+              style={{ opacity: nodeOpacity("t"), transition: "opacity .25s" }}
             >
-              ▌
-            </motion.span>
-          </div>
-        </div>
-      </div>
+              <rect x={384} y={108} width={216} height={84} rx={8} fill="var(--blue-bg)" stroke="var(--blue)" strokeWidth={1.4} />
+              <text x={416} y={143} fontSize={13} fill="var(--blue)" fontWeight={600}>
+                TRANSFORM
+              </text>
+              <text x={416} y={164} fontSize={11} fill="var(--muted-txt)">
+                ETL · NiFi · Java · SQL
+              </text>
+            </g>
 
-      {/* Floating label below card */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-3 flex items-center gap-2 px-1"
+            {OUTPUT_NODES.map((n) => (
+              <g
+                key={n.id}
+                onMouseEnter={() => setHover(n.id)}
+                onMouseLeave={() => setHover(null)}
+                className="cursor-pointer"
+                style={{ opacity: nodeOpacity(n.id), transition: "opacity .25s" }}
+              >
+                <rect x={788} y={n.y} width={196} height={48} rx={6} fill="var(--amber-bg)" stroke="var(--amber-line)" />
+                <text x={804} y={n.y + 20} fontSize={11} fill="var(--faint)">
+                  serve
+                </text>
+                <text x={804} y={n.y + 36} fontSize={12.5} fill="var(--text)" fontWeight={600}>
+                  {n.label}
+                </text>
+              </g>
+            ))}
+          </g>
+        </svg>
+      </div>
+      <div
+        className="mt-3.5 min-h-[16px] text-center font-mono text-[11.5px] transition-colors duration-200"
+        style={{ color: "var(--dim)" }}
       >
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-        </span>
-        <span className="text-xs text-muted-foreground font-mono">open to new projects</span>
-      </motion.div>
-    </motion.div>
+        {hover ? CAPTIONS[hover] : "a decade of moving data — aviation, telecom, public health · hover a node"}
+      </div>
+    </div>
   )
 }
 
 export default function Hero() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset
-      window.scrollTo({ top: offsetTop, behavior: "smooth" })
-    }
-  }
-
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--border)) 1px, transparent 1px),
-                            linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px)`,
-          backgroundSize: "72px 72px",
-          opacity: 0.35,
-        }}
-      />
-      {/* Warm glow top-right */}
-      <div className="absolute -top-32 right-0 w-[700px] h-[600px] rounded-full bg-primary/10 blur-3xl pointer-events-none opacity-60" />
-
-      <div className="section-container relative z-10">
-        <div className="grid lg:grid-cols-[1fr_auto] gap-14 xl:gap-20 items-center">
-
-          {/* Left — text */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="flex items-center gap-2.5 mb-7"
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
-              </span>
-              <span className="text-sm font-medium text-muted-foreground tracking-wide">
-                Available for work
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-5xl md:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-tight leading-[1.08] mb-6"
-            >
-              Hi, I'm Samuel.
-              <br />
-              <span className="text-primary">I build data-heavy</span>
-              <br />
-              backend systems.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.22 }}
-              className="text-base md:text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed"
-            >
-              10+ years across aviation, telecom, and healthcare — building integration
-              pipelines, ETL systems, and the observability that keeps them running, based in
-              Addis Ababa, Ethiopia.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.32 }}
-              className="flex flex-wrap gap-3 mb-10"
-            >
-              <Button
-                size="lg"
-                onClick={() => scrollToSection("projects")}
-                className="group font-semibold"
-              >
-                View My Work
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button size="lg" variant="outline" asChild className="font-semibold">
-                <a href="/cv.pdf" download="Samuel_Abebayehu_CV.pdf">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download CV
-                </a>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-              className="flex items-center gap-5"
-            >
-              <a
-                href="https://github.com/samuelabebayehu"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/samuel-abebayehu-a82807a6/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="mailto:samuelabebayehu@gmail.com"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right — code card (desktop only) */}
-          <div className="hidden lg:flex items-center justify-end">
-            <CodeCard />
-          </div>
-
+    <div
+      style={{
+        backgroundImage:
+          "radial-gradient(700px 420px at 78% 4%, var(--glow), transparent 70%), linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px)",
+        backgroundSize: "100% 100%, 56px 56px, 56px 56px",
+      }}
+    >
+      <div id="top" className="section-container pb-10 pt-16 sm:pt-20 md:pb-10 md:pt-[88px]">
+        <div
+          className="mb-[18px] flex items-center gap-2.5 font-mono text-[13px]"
+          style={{ color: "var(--green)" }}
+        >
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: "var(--green)", boxShadow: "0 0 8px var(--green)" }}
+          />
+          available for projects
+        </div>
+        <h1 className="m-0 text-[42px] font-semibold leading-[1.08] tracking-[-0.025em] sm:text-5xl md:text-[64px]">
+          Samuel Abebayehu.
+          <br />
+          <span style={{ color: "var(--dim)" }}>Backend &amp; data engineer.</span>
+        </h1>
+        <div className="mt-8 flex flex-wrap gap-3.5">
+          <a
+            href="#projects"
+            className="rounded-md px-[22px] py-3 font-sans text-[13.5px] font-semibold"
+            style={{ background: "var(--blue)", color: "var(--btn-text)" }}
+          >
+            View work →
+          </a>
+          <a
+            href="/cv.pdf"
+            download="Samuel_Abebayehu_CV.pdf"
+            className="rounded-md border px-[22px] py-3 font-sans text-[13.5px] font-medium"
+            style={{ borderColor: "var(--line2)", color: "var(--muted-txt)" }}
+          >
+            ↓ Resume
+          </a>
         </div>
       </div>
-    </section>
+
+      <div className="section-container pb-16 pt-3 md:pb-[72px]">
+        <DataFlowDiagram />
+      </div>
+    </div>
   )
 }

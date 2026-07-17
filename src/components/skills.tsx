@@ -1,77 +1,70 @@
-"use client"
+const BARS = [
+  { label: "SQL", width: "100%", years: "11y", color: "var(--blue)" },
+  { label: "Java", width: "82%", years: "9y", color: "var(--blue)" },
+  { label: "Python", width: "64%", years: "7y", color: "var(--blue)" },
+  { label: "ETL / NiFi", width: "55%", years: "6y", color: "var(--green)" },
+  { label: "BI tools", width: "55%", years: "6y", color: "var(--green)" },
+  { label: "React / Next", width: "36%", years: "4y", color: "var(--amber)" },
+  { label: "Observability", width: "36%", years: "4y", color: "var(--amber)" },
+]
 
-import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
-import { Server, Database, Activity, Monitor } from "lucide-react"
-
-const skillCategories = [
+const CATEGORIES = [
   {
-    icon: Server,
-    title: "Backend & Integration",
-    skills: ["Java", "Spring Boot", "Python", "Node.js", "REST / SOAP", "GraphQL", "Apache NiFi", "Zookeeper"],
+    title: "BACKEND & INTEGRATION",
+    color: "var(--blue)",
+    items: "Java · Spring Boot · Python · Node.js · REST / SOAP · NiFi · Zookeeper",
   },
   {
-    icon: Database,
-    title: "Data Engineering & Analytics",
-    skills: ["PostgreSQL", "MySQL", "SQL", "ETL Pipelines", "Data Warehousing", "Apache Superset", "Power BI", "SAP BI"],
+    title: "DATA ENGINEERING",
+    color: "var(--green)",
+    items: "PostgreSQL · MySQL · ETL · Warehousing · Superset · Power BI · SAP BI",
   },
   {
-    icon: Activity,
-    title: "Observability & Reliability",
-    skills: ["Splunk", "ELK Stack", "Grafana", "BMC Helix", "Incident Management", "Oracle Enterprise Manager"],
-  },
-  {
-    icon: Monitor,
-    title: "Frontend & DevOps",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Docker", "AWS", "Linux", "Keycloak"],
+    title: "OBSERVABILITY & OPS",
+    color: "var(--amber)",
+    items: "Splunk · ELK · Grafana · BMC Helix · Docker · AWS · Linux · Keycloak",
   },
 ]
 
 export default function Skills() {
   return (
-    <section id="skills">
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <p className="text-primary font-medium mb-2 text-sm tracking-wider uppercase">Skills</p>
-          <h2 className="section-title">Technologies I Work With</h2>
-          <p className="text-muted-foreground max-w-2xl">
-            A toolkit built across years of shipping web applications, data pipelines, and system integrations.
-          </p>
-        </motion.div>
+    <div id="skills" className="section-container scroll-mt-[70px] py-16 md:py-[72px]">
+      <div className="mb-1.5 font-mono text-[10px] tracking-[0.2em]" style={{ color: "var(--faint)" }}>
+        SKILLS
+      </div>
+      <div className="mb-8 text-[26px] font-semibold tracking-[-0.02em] sm:text-[30px]">Stack, by years in production</div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          {skillCategories.map((category, index) => (
-            <motion.div
+      <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+        <div className="grid content-start gap-3.5">
+          {BARS.map((bar) => (
+            <div key={bar.label} className="grid grid-cols-[80px_1fr_34px] items-center gap-3 sm:grid-cols-[100px_1fr_34px]">
+              <span className="font-mono text-xs font-medium">{bar.label}</span>
+              <div className="h-[18px] rounded-[3px]" style={{ background: "var(--bar-track)" }}>
+                <div className="h-[18px] rounded-[3px]" style={{ width: bar.width, background: bar.color }} />
+              </div>
+              <span className="font-mono text-[11px]" style={{ color: "var(--faint)" }}>
+                {bar.years}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="grid content-start gap-3.5">
+          {CATEGORIES.map((category) => (
+            <div
               key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
+              className="rounded-lg border px-5 py-[18px]"
+              style={{ borderColor: "var(--line)", background: "var(--site-card)", boxShadow: "var(--site-shadow)" }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <category.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="font-semibold text-lg">{category.title}</h3>
+              <div className="mb-2 font-mono text-xs font-semibold" style={{ color: category.color }}>
+                {category.title}
               </div>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <Badge key={skill} variant="secondary" className="text-sm font-normal px-3 py-0.5">
-                    {skill}
-                  </Badge>
-                ))}
+              <div className="font-mono text-[12.5px] leading-[1.8]" style={{ color: "var(--muted-txt)" }}>
+                {category.items}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }

@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Samuel Abebayehu - Portfolio</title>
-    <script type="module" crossorigin src="/assets/index-DwcevWJv.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CJ0TBxtL.css">
+    <script type="module" crossorigin src="/assets/index-ByAQUUmV.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D9OL9vwm.css">
   </head>
   <body>
     <div id="root"></div>
@@ -15,15 +15,9 @@
       (function () {
         try {
           const storedTheme = localStorage.getItem("vite-ui-theme");
-          if (
-            storedTheme === "dark" ||
-            (!storedTheme &&
-              window.matchMedia("(prefers-color-scheme: dark)").matches)
-          ) {
-            document.documentElement.classList.add("dark");
-          } else {
-            document.documentElement.classList.remove("dark");
-          }
+          const theme = storedTheme === "light" ? "light" : "dark";
+          document.documentElement.classList.remove("light", "dark");
+          document.documentElement.classList.add(theme);
         } catch (e) {}
       })();
     </script>

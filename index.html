@@ -14,15 +14,9 @@
       (function () {
         try {
           const storedTheme = localStorage.getItem("vite-ui-theme");
-          if (
-            storedTheme === "dark" ||
-            (!storedTheme &&
-              window.matchMedia("(prefers-color-scheme: dark)").matches)
-          ) {
-            document.documentElement.classList.add("dark");
-          } else {
-            document.documentElement.classList.remove("dark");
-          }
+          const theme = storedTheme === "light" ? "light" : "dark";
+          document.documentElement.classList.remove("light", "dark");
+          document.documentElement.classList.add(theme);
         } catch (e) {}
       })();
     </script>
