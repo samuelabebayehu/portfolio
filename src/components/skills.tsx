@@ -2,28 +2,28 @@
 
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
-import { Monitor, Server, Database, Layers } from "lucide-react"
+import { Server, Database, Activity, Monitor } from "lucide-react"
 
 const skillCategories = [
   {
-    icon: Monitor,
-    title: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML / CSS", "Framer Motion"],
-  },
-  {
     icon: Server,
-    title: "Backend",
-    skills: ["Java", "Spring Boot", "Node.js", "Python", "GraphQL", "REST APIs"],
+    title: "Backend & Integration",
+    skills: ["Java", "Spring Boot", "Python", "Node.js", "REST / SOAP", "GraphQL", "Apache NiFi", "Zookeeper"],
   },
   {
     icon: Database,
-    title: "Databases",
-    skills: ["PostgreSQL", "MySQL", "Redis", "SQL"],
+    title: "Data Engineering & Analytics",
+    skills: ["PostgreSQL", "MySQL", "SQL", "ETL Pipelines", "Data Warehousing", "Apache Superset", "Power BI", "SAP BI"],
   },
   {
-    icon: Layers,
-    title: "DevOps & Tools",
-    skills: ["Docker", "Git / GitHub", "AWS", "Linux", "CI/CD", "Keycloak", "Apache Superset"],
+    icon: Activity,
+    title: "Observability & Reliability",
+    skills: ["Splunk", "ELK Stack", "Grafana", "BMC Helix", "Incident Management", "Oracle Enterprise Manager"],
+  },
+  {
+    icon: Monitor,
+    title: "Frontend & DevOps",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Docker", "AWS", "Linux", "Keycloak"],
   },
 ]
 

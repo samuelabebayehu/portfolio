@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar"
 import { ThemeProvider } from "@/theme-provider"
 import Hero from "@/components/hero"
 import About from "@/components/about"
+import Experience from "@/components/experience"
 import Skills from "@/components/skills"
 import ProjectDashboard from "@/components/project-dashboard"
 import Contact from "@/components/contact"
@@ -16,6 +17,7 @@ function App() {
           <main>
             <Hero />
             <About />
+            <Experience />
             <Skills />
             <ProjectDashboard />
             <Contact />

@@ -50,7 +50,7 @@ function CodeCard() {
           <div className="pl-5">
             <span style={{ color: p }}>role</span>
             <span style={{ color: op }}>: </span>
-            <span style={{ color: s }}>"Full-Stack Developer"</span>
+            <span style={{ color: s }}>"Backend & Data Engineer"</span>
             <span style={{ color: base }}>,</span>
           </div>
 
@@ -64,14 +64,42 @@ function CodeCard() {
           <div className="pl-5">
             <span style={{ color: p }}>experience</span>
             <span style={{ color: op }}>: </span>
-            <span style={{ color: s }}>"9+ years"</span>
+            <span style={{ color: s }}>"10+ years"</span>
             <span style={{ color: base }}>,</span>
+          </div>
+
+          <div className="pl-5">
+            <span style={{ color: p }}>domains</span>
+            <span style={{ color: op }}>: </span>
+            <span style={{ color: base }}>["</span>
+            <span style={{ color: s }}>Aviation</span>
+            <span style={{ color: base }}>"</span>
+            <span style={{ color: base }}>, "</span>
+            <span style={{ color: s }}>Telecom</span>
+            <span style={{ color: base }}>"</span>
+            <span style={{ color: base }}>, "</span>
+            <span style={{ color: s }}>Healthcare</span>
+            <span style={{ color: base }}>"],</span>
           </div>
 
           <div className="pl-5">
             <span style={{ color: p }}>stack</span>
             <span style={{ color: op }}>: </span>
             <span style={{ color: base }}>{"{"}</span>
+          </div>
+
+          <div className="pl-10">
+            <span style={{ color: p }}>backend</span>
+            <span style={{ color: op }}>: </span>
+            <span style={{ color: base }}>["</span>
+            <span style={{ color: s }}>Java</span>
+            <span style={{ color: base }}>"</span>
+            <span style={{ color: base }}>, "</span>
+            <span style={{ color: s }}>Spring Boot</span>
+            <span style={{ color: base }}>"</span>
+            <span style={{ color: base }}>, "</span>
+            <span style={{ color: s }}>Python</span>
+            <span style={{ color: base }}>"],</span>
           </div>
 
           <div className="pl-10">
@@ -89,30 +117,30 @@ function CodeCard() {
           </div>
 
           <div className="pl-10">
-            <span style={{ color: p }}>backend</span>
+            <span style={{ color: p }}>data</span>
             <span style={{ color: op }}>: </span>
             <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>Spring Boot</span>
+            <span style={{ color: s }}>PostgreSQL</span>
             <span style={{ color: base }}>"</span>
             <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Node.js</span>
+            <span style={{ color: s }}>ETL</span>
             <span style={{ color: base }}>"</span>
             <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>Python</span>
+            <span style={{ color: s }}>Apache Superset</span>
             <span style={{ color: base }}>"],</span>
           </div>
 
           <div className="pl-10">
-            <span style={{ color: p }}>infra</span>
+            <span style={{ color: p }}>observability</span>
             <span style={{ color: op }}>: </span>
             <span style={{ color: base }}>["</span>
-            <span style={{ color: s }}>Docker</span>
+            <span style={{ color: s }}>Splunk</span>
             <span style={{ color: base }}>"</span>
             <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>PostgreSQL</span>
+            <span style={{ color: s }}>ELK</span>
             <span style={{ color: base }}>"</span>
             <span style={{ color: base }}>, "</span>
-            <span style={{ color: s }}>AWS</span>
+            <span style={{ color: s }}>Grafana</span>
             <span style={{ color: base }}>"],</span>
           </div>
 
@@ -210,9 +238,9 @@ export default function Hero() {
             >
               Hi, I'm Samuel.
               <br />
-              <span className="text-primary">I build software</span>
+              <span className="text-primary">I build data-heavy</span>
               <br />
-              that works.
+              backend systems.
             </motion.h1>
 
             <motion.p
@@ -221,9 +249,9 @@ export default function Hero() {
               transition={{ duration: 0.4, delay: 0.22 }}
               className="text-base md:text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed"
             >
-              Full-stack developer based in Addis Ababa, Ethiopia. I specialize in web
-              applications and data pipelines — from marketplace platforms to healthcare
-              infrastructure.
+              10+ years across aviation, telecom, and healthcare — building integration
+              pipelines, ETL systems, and the observability that keeps them running, based in
+              Addis Ababa, Ethiopia.
             </motion.p>
 
             <motion.div
