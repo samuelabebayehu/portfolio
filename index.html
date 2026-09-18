@@ -2,23 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Samuel Abebayehu - Portfolio</title>
+    <meta name="description" content="Samuel Abebayehu is a software developer and technical lead building reliable software and data systems." />
+    <meta name="theme-color" content="#111318" />
+    <title>Samuel Abebayehu · Software systems</title>
+    <script>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        if (stored === "light" || stored === "dark") {
+          document.documentElement.setAttribute("data-theme", stored);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // Check local storage for theme and apply it immediately to avoid flash
-      (function () {
-        try {
-          const storedTheme = localStorage.getItem("vite-ui-theme");
-          const theme = storedTheme === "light" ? "light" : "dark";
-          document.documentElement.classList.remove("light", "dark");
-          document.documentElement.classList.add(theme);
-        } catch (e) {}
-      })();
-    </script>
   </body>
 </html>
