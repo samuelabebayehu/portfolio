@@ -3,6 +3,9 @@ export const profile = {
   role: "Software developer and technical lead",
   location: "Addis Ababa, Ethiopia",
   email: "samuelabebayehu@gmail.com",
+  emailAlt: "info@samuel.et",
+  phone: "+251988410417",
+  phoneDisplay: "+251 98 841 0417",
   github: "https://github.com/samuelabebayehu",
   linkedin: "https://www.linkedin.com/in/samuel-abebayehu-a82807a6/",
 }
@@ -13,9 +16,9 @@ export const experience = [
     organisation: "ICAP International",
     role: "Software Developer",
     scope: [
-      "OpenMRS modules and ETHIOHRI O3 deployment support",
-      "MambaETL, CDC architecture, and observability",
-      "PEPFAR/DATIM reporting pipelines and training",
+      "Building OpenMRS MambaETL pipelines",
+      "MambaETL core optimization and opensource contribution",
+      "PEPFAR/DATIM reporting and visualizations",
     ],
     stack: ["Java", "MySQL", "OpenMRS", "Debezium", "Superset"],
     tag: "Enterprise",
@@ -32,18 +35,18 @@ export const experience = [
     stack: ["Splunk", "ELK", "Oracle Enterprise Manager", "Grafana", "BMC Helix"],
     tag: "Enterprise",
   },
-  {
-    period: "2021",
-    organisation: "Ethiopian Airlines",
-    role: "Acting Team Leader, CRM",
-    scope: [
-      "Led CRM platform implementation across sales, service, marketing",
-      "Designed third-party and internal integration approaches",
-      "Team adoption, mentoring, and performance follow-up",
-    ],
-    stack: ["Oracle CX", "Java", "Python"],
-    tag: "Enterprise",
-  },
+  // {
+  //   period: "2021",
+  //   organisation: "Ethiopian Airlines",
+  //   role: "Acting Team Leader, CRM",
+  //   scope: [
+  //     "Led CRM platform implementation across sales, service, marketing",
+  //     "Designed third-party and internal integration approaches",
+  //     "Team adoption, mentoring, and performance follow-up",
+  //   ],
+  //   stack: ["Oracle CX", "Java", "Python"],
+  //   tag: "Enterprise",
+  // },
   {
     period: "2015-2021",
     organisation: "Ethiopian Airlines",
@@ -52,6 +55,7 @@ export const experience = [
       "Real-time extraction and integration pipelines",
       "Intelligence Exchange PaaS and NiFi flows",
       "SAP BI and Power BI reporting",
+      "CRM platform, integrations and features development"
     ],
     stack: ["Java", "Python", "SQL", "NiFi", "Power BI"],
     tag: "Enterprise",
